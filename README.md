@@ -16,9 +16,7 @@
 
 ## Note
 
-The provided MTES-KG.m file needs to be placed in the Algorithms Folder *"MTO/Algorithm/Multi-task/Multi-population/MTES-KG"* in [MTO-Platform (MToP)](https://github.com/intLyc/MTO-Platform) for use.
-
-The MTO-Platform (MToP) has incorporated relevant algorithms and provides convenient functions. We highly recommend using it for code running. [https://github.com/intLyc/MTO-Platform](https://github.com/intLyc/MTO-Platform)
+The MTO-Platform (MToP) has incorporated the relevant algorithm at *"MTO/Algorithm/Multi-task/Multi-population/MTES-KG/MTES-KG.m"* and provides convenient utility functions. We highly recommend using it for code running. [https://github.com/intLyc/MTO-Platform](https://github.com/intLyc/MTO-Platform)
 
 The real-world applications covered in the paper have also been uploaded to the MTO-Platform
 
