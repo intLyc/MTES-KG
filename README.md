@@ -5,12 +5,12 @@
 ## Reference
 
 ```
-% @Article{Li2023MTES-KG,
-%   title    = {Multitask Evolution Strategy with Knowledge-Guided External Sampling},
-%   author   = {Li, Yanchi and Gong, Wenyin and Li, Shuijia},
-%   journal  = {IEEE Transactions on Evolutionary Computation},
-%   year     = {2023},
-% } 
+@Article{Li2023MTES-KG,
+  title    = {Multitask Evolution Strategy with Knowledge-Guided External Sampling},
+  author   = {Li, Yanchi and Gong, Wenyin and Li, Shuijia},
+  journal  = {IEEE Transactions on Evolutionary Computation},
+  year     = {2023},
+} 
 ```
 
 ## Note
