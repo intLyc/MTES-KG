@@ -3,19 +3,23 @@ classdef MTES_KG < Algorithm
 
 %------------------------------- Reference --------------------------------
 % @Article{Li2023MTES-KG,
-%   title    = {Multitask Evolution Strategy with Knowledge-Guided External Sampling},
-%   author   = {Li, Yanchi and Gong, Wenyin and Li, Shuijia},
-%   journal  = {IEEE Transactions on Evolutionary Computation},
-%   year     = {2023},
-%   doi      = {10.1109/TEVC.2023.3330265},
+%   title      = {Multitask Evolution Strategy With Knowledge-Guided External Sampling},
+%   author     = {Li, Yanchi and Gong, Wenyin and Li, Shuijia},
+%   journal    = {IEEE Transactions on Evolutionary Computation},
+%   year       = {2024},
+%   number     = {6},
+%   pages      = {1733-1745},
+%   volume     = {28},
+%   doi        = {10.1109/TEVC.2023.3330265},
 % }
 %--------------------------------------------------------------------------
 
 %------------------------------- Copyright --------------------------------
-% Copyright (c) 2022 Yanchi Li. You are free to use the MTO-Platform for
-% research purposes. All publications which use this platform or any code
-% in the platform should acknowledge the use of "MTO-Platform" and cite
-% or footnote "https://github.com/intLyc/MTO-Platform"
+% Copyright (c) Yanchi Li. You are free to use the MToP for research
+% purposes. All publications which use this platform should acknowledge
+% the use of "MToP" or "MTO-Platform" and cite as "Y. Li, W. Gong, F. Ming,
+% T. Zhang, S. Li, and Q. Gu, MToP: A MATLAB Optimization Platform for
+% Evolutionary Multitasking, 2023, arXiv:2312.08134"
 %--------------------------------------------------------------------------
 
 properties (SetAccess = private)
@@ -72,14 +76,14 @@ methods
                 sample{t}(i) = Individual();
             end
             mStep{t} = 0; % mean sample step
-            numExS{t} = []; % external sapmle number memory
-            sucExS{t} = []; % external sapmle success number memory
+            numExS{t} = []; % external sample number memory
+            sucExS{t} = []; % external sample success number memory
             tau(t) = Algo.tau0; % external sample number
             record_tau{t} = tau(t);
         end
         rank = {};
 
-        while Algo.notTerminated(Prob)
+        while Algo.notTerminated(Prob, sample)
             %% Sample new solutions
             oldsample = sample;
             sample{t} = sample{t}(1:lambda);
@@ -123,7 +127,7 @@ methods
 
             %% Update algorithm parameters
             for t = 1:Prob.T
-                rank{t} = Algo.EvaluationAndSort(sample{t}, Prob, t);
+                [sample{t}, rank{t}] = Algo.EvaluationAndSort(sample{t}, Prob, t);
 
                 % Storage number and success of external samples
                 numExS{t}(Algo.Gen) = tau(t);
@@ -185,11 +189,11 @@ methods
         end
     end
 
-    function rank = EvaluationAndSort(Algo, sample, Prob, t)
-        % Boundary Constraint Handling
+    function [sample, rank] = EvaluationAndSort(Algo, sample, Prob, t)
+        %% Boundary constraint handling
         boundCVs = zeros(length(sample), 1);
         for i = 1:length(sample)
-            % Boundary Constraint Violation
+            % Boundary constraint violation
             tempDec = sample(i).Dec;
             tempDec(tempDec < -0.05) = -0.05;
             tempDec(tempDec > 1.05) = 1.05;
